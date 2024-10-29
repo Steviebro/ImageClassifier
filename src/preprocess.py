@@ -1,4 +1,15 @@
-import torch
+"""
+preprocess.py
+
+This module handles all data preprocessing steps.
+The final method performPreprocessing() encompasses all required steps:
+    1. Load the data from CIFAR10, keeping the first 500 training and 100 test elements
+    2. Transform the images to tensors in preparation for ResNet-18 usage
+    3. Use ResNet-18 to get feature vectors for each data element
+    4. Use PCA to reduce the vector sizes from 512 --> 50
+    5. Recombine the data with the labels in a list (1 element per image) of tuples (features, label)
+"""
+
 import torch as tr
 import torchvision as tv
 from torch.utils.data import DataLoader
@@ -62,21 +73,24 @@ def getFeatureVectors(trainingSubSet, testingSubSet):
     trainingFeatureVectors = []
     testingFeatureVectors = []
 
+    # Remove outer layer of ResNet-18
     resnet18 = tv.models.resnet18()
     resnet18.fc = tr.nn.Identity()
 
-    trainingLoader = DataLoader(trainingSubSet, batch_size=8, shuffle=False)
-    testingLoader = DataLoader(testingSubSet, batch_size=8, shuffle=False)
+    # Load the data into batches
+    trainingLoader = DataLoader(trainingSubSet, batch_size=64, shuffle=False)
+    testingLoader = DataLoader(testingSubSet, batch_size=64, shuffle=False)
 
+    # Enable GPU use if available
     if tr.cuda.is_available():
         resnet18 = resnet18.cuda()
         device = tr.device('cuda')
     else:
         resnet18 = resnet18.cpu()
         device = tr.device('cpu')
-
     resnet18 = resnet18.to(device)
 
+    # Apply ResNet-18 to the data batches
     with tr.no_grad():
         for i in trainingLoader:
             images, labels = i
@@ -90,10 +104,9 @@ def getFeatureVectors(trainingSubSet, testingSubSet):
                 images = images.cuda()
             testingFeatureVectors.append(resnet18(images))
 
+    # Concatenate the batches into a single list
     trainingFeatureVectors = tr.cat(trainingFeatureVectors)
     testingFeatureVectors = tr.cat(testingFeatureVectors)
-
-    print(len(trainingFeatureVectors), len(testingFeatureVectors))
     return trainingFeatureVectors, testingFeatureVectors
 
 def reduceFeatureVectors(trainingFeatureVectors, testingFeatureVectors):
@@ -104,14 +117,36 @@ def reduceFeatureVectors(trainingFeatureVectors, testingFeatureVectors):
     # Set the number of components
     pca = PCA(n_components=50)
 
+    # Fit the vector to the required number of components
     reducedTrainingFeatureVectors = pca.fit_transform(trainingFeatureVectors)
     reducedTestingFeatureVectors = pca.fit_transform(testingFeatureVectors)
 
+    # Convert them back to tensor
     reducedTrainingFeatureVectors = tr.tensor(reducedTrainingFeatureVectors)
     reducedTestingFeatureVectors = tr.tensor(reducedTestingFeatureVectors)
     return reducedTrainingFeatureVectors, reducedTestingFeatureVectors
 
+# Performs all Preprocessing: load, transform, feature vectors
+# Returns a list containing tuples for each data element (features, label)
+def performPreprocessing():
+    # Load Datasets : Keep first 500/class
+    trainingSet, testingSet = load()
 
+    # Prepare DataSets for ResNet-18
+    trainingSet, testingSet = transform(trainingSet, testingSet)
 
+    # ResNet-18 Get Feature Vectors [512,1]
+    trainingFeatureVectors, testingFeatureVectors = getFeatureVectors(trainingSet, testingSet)
 
+    # ResNet-18 Reduce Feature Vectors to [50,1]
+    reducedTrainingFeatureVectors, reducedTestingFeatureVectors = reduceFeatureVectors(trainingFeatureVectors, testingFeatureVectors)
 
+    # Combine feature vectors with labels
+    finalTraining = []
+    finalTesting = []
+    for i, featureVector in enumerate(reducedTrainingFeatureVectors):
+        finalTraining.append((featureVector, trainingSet[i][1]))
+    for i, featureVector in enumerate(reducedTestingFeatureVectors):
+        finalTesting.append((featureVector, testingSet[i][1]))
+
+    return finalTraining, finalTesting
