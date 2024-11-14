@@ -13,6 +13,7 @@ The final method performPreprocessing() encompasses all required steps:
 import torch as tr
 import torchvision as tv
 from torch.utils.data import DataLoader
+from torchvision.models import ResNet18_Weights
 from sklearn.decomposition import PCA
 
 
@@ -74,8 +75,9 @@ def getFeatureVectors(trainingSubSet, testingSubSet):
     testingFeatureVectors = []
 
     # Remove outer layer of ResNet-18
-    resnet18 = tv.models.resnet18()
+    resnet18 = tv.models.resnet18(weights=ResNet18_Weights.DEFAULT)
     resnet18.fc = tr.nn.Identity()
+    resnet18.eval()
 
     # Load the data into batches
     trainingLoader = DataLoader(trainingSubSet, batch_size=64, shuffle=False)
