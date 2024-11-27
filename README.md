@@ -22,7 +22,7 @@ There are only **THREE FILES** that are meant to be run in this project. Most no
 - **IMPORTANT WARNING**: Running scripts 2 or 3 **WILL OVERWRITE** the saved models and variants which will inevitably lead to some discrepancies in the results obtained in the evaluation.
 
 
-# File Details
+# File Descriptions
 
 ### Source Directory (`/src/`):
 #### Scripts:
@@ -77,6 +77,7 @@ Convolutional Neural Network:
 4. `models/cnn/cnnModel11Layers2Kernel.pkl`: Reduced Kernel Size CNN Model
 5. `models/cnn/cnnModel11Layers4Kernel.pkl`: Increased Kernel Size CNN Model
 
-
-
-
+### Other Files in Root:
+1. `.gitignore`: Specifies files to be ignored by git.
+2. `README.md`: Lists instructions and information about the project and files.
+3. `requirements.txt`: Lists required dependencies for the project.
