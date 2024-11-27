@@ -10,9 +10,9 @@ The dependencies can be found in the `/requirements.txt` file.
 Simply run `pip install` to install all required dependencies
 
 ## Important First Step: Saved Datasets
-Since the saved models were too large for GitHub, I would ask you to please use this link to obtain the saved models:
-
-Once downloaded, please extract the `/models/` folder and replace the empty `/models/` with the downloaded folder.
+Since the saved models were too large for GitHub, I would ask you to please use this link to obtain the saved models (Note: Concordia account required):\
+https://liveconcordia-my.sharepoint.com/:f:/g/personal/s_ingra_live_concordia_ca/Emr3pbxlMo9IjOQegXXIO2EBhtZw75b5Ptln2FWspZ00mg?e=NBdKDQ \
+Once downloaded, please extract the `/models/` folder and replace the empty `/models/` directory with the downloaded folder.
 
 # Run Instructions
 There are only **THREE FILES** that are meant to be run in this project. Most notably the first one, the other two only if necessary.
