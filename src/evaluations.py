@@ -1,4 +1,6 @@
 import numpy as np
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
 
 def getConfusionMatrix(groundTruths, predictions):
     confusionMatrix = np.zeros((10, 10), dtype=int)

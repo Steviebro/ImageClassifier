@@ -9,9 +9,14 @@
 The dependencies can be found in the `/requirements.txt` file.
 Simply run `pip install` to install all required dependencies
 
+## Important First Step: Saved Datasets
+Since the saved models were too large for GitHub, I would ask you to please use this link to obtain the saved models:
+
+Once downloaded, please extract the `/models/` folder and replace the empty `/models/` with the downloaded folder.
+
 # Run Instructions
 There are only **THREE FILES** that are meant to be run in this project. Most notably the first one, the other two only if necessary.
-1. **MAIN SCRIPT**: Run the script `/src/dataVisualizationScript.py` to load the datasets and saved models then test and evaluate them on the testing and training sets.
+1. **MAIN SCRIPT**: Run the script `/src/mainScript.py` to load the datasets and saved models then test and evaluate them on the testing and training sets.
 2. If dataset (re-)preprocessing is required: run the script `/src/datasetProcessingScript.py` to load, preprocess and save the datasets.
 3. If model (re-)training is required: run the script `/src/retrainModelsScript.py` to train all models and their variants and save the datasets. All but desired models can be commented out, but they are all there for convenience.
 - **IMPORTANT WARNING**: Running scripts 2 or 3 **WILL OVERWRITE** the saved models and variants which will inevitably lead to some discrepancies in the results obtained in the evaluation.
@@ -21,7 +26,7 @@ There are only **THREE FILES** that are meant to be run in this project. Most no
 
 ### Source Directory (`/src/`):
 #### Scripts:
-  1. `dataVisualizationScript.py`:
+  1. `mainScript.py`:
      - Loads saved datasets (images & feature vectors) and all saved models
      - Tests and evaluates each model both on the testing set and the training set
   2. `datasetProcessingScript.py`:
@@ -48,7 +53,7 @@ Each of the above files contain code for their respective model category. Code f
 
 
 ### Models Directory (`/models/`):
-Contains all saved models, including their variants. These variants are discussed in depth in the report. An exhaustive list is as follows:
+Contains all saved models, including their variants. An exhaustive list is as follows:
 
 Naive Bayes:
 1. `models/bayes/bayesModel.pkl`: Main Bayes Model

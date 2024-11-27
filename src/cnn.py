@@ -179,9 +179,4 @@ def testCNNModel(cnnModel, testingSet, batchSize):
 
             groundTruths.extend(labels.cpu().numpy())
             predictions.extend(prediction.cpu().numpy())
-
-    accuracy = accuracy_score(groundTruths, predictions)
-    confusionMatrix = confusion_matrix(groundTruths, predictions)
-    print(confusionMatrix)
-    print(f"CNN Implementation Accuracy: {accuracy * 100:.2f}%")
     return groundTruths, predictions
