@@ -3,16 +3,24 @@
 #### Author: Steven Gingras (40098045)
 #### Team: Theta
 
-### Python Version: 3.9
+# Environment Setup
+Clone the repository using:\
+`git clone https://github.com/Steviebro/472Project.git`
 
-### Dependencies
-The dependencies can be found in the `/requirements.txt` file.
-Simply run `pip install` to install all required dependencies
+Ensure you are using python interpreter version 3.9
 
-## Important First Step: Saved Datasets
+### Important Step: Saved Datasets
 Since the saved models were too large for GitHub, I would ask you to please use this link to obtain the saved models (Note: Concordia account required):\
 https://liveconcordia-my.sharepoint.com/:f:/g/personal/s_ingra_live_concordia_ca/Emr3pbxlMo9IjOQegXXIO2EBhtZw75b5Ptln2FWspZ00mg?e=NBdKDQ \
-Once downloaded, please extract the `/models/` folder and replace the empty `/models/` directory with the downloaded folder.
+Once downloaded, please extract the `/models/` folder and replace the empty `/models/` directory with the extracted folder.
+
+### Dependencies
+1. First, use the following command to install pytorch:
+`pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124`
+
+2. The remaining dependencies can be found in the `/requirements.txt` file.
+Simply run `pip install -r requirements.txt` to install them.
+
 
 # Run Instructions
 There are only **THREE FILES** that are meant to be run in this project. Most notably the first one, the other two only if necessary.
@@ -79,5 +87,6 @@ Convolutional Neural Network:
 
 ### Other Files in Root:
 1. `.gitignore`: Specifies files to be ignored by git.
+2. `Project_Report.pdf`: The Report for the project.
 2. `README.md`: Lists instructions and information about the project and files.
 3. `requirements.txt`: Lists required dependencies for the project.
