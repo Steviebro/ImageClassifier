@@ -48,8 +48,6 @@ Each of the above files contain code for their respective model category. Code f
     - Contains code for all preprocessing of the datasets.
   9. `evaluations.py`:
     - Contains code for generating evaluation metrics based on ground truths and predictions.
-  10. `/data/*`:
-    - Directory for loading the data from the CIFAR10 dataset.
 
 
 ### Models Directory (`/models/`):
