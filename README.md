@@ -1,4 +1,4 @@
-# COMP 472 Project
+# Image Classifier Project
 
 #### Author: Steven Gingras
 #### Team: Theta
