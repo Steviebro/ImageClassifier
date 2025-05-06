@@ -1,11 +1,11 @@
 # COMP 472 Project
 
-#### Author: Steven Gingras (40098045)
+#### Author: Steven Gingras
 #### Team: Theta
 
 # Environment Setup
 Clone the repository using:\
-`git clone https://github.com/Steviebro/472Project.git`
+`git clone https://github.com/Steviebro/ImageClassifier.git`
 
 Ensure you are using python interpreter version 3.9
 
